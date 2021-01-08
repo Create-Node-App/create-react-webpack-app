@@ -79,7 +79,6 @@ const fileLoader = ({ root, templateDir, appName, originalDirectory, alias, verb
   path,
 }) => {
   const mode = getModeFromPath(path);
-  console.log(path);
 
   const loaders = {
     copy: copyLoader,
