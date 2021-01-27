@@ -9,7 +9,7 @@ function copyFile(src, dest, verbose) {
   try {
     fs.copySync(src, dest, { overwrite: true });
     if (verbose) {
-      console.log(chalk.green(`Added "${path}" successfully`));
+      console.log(chalk.green(`Added "${dest}" successfully`));
     }
   } catch (err) {
     console.log(chalk.red(`Cannot copy file ${src} to ${dest}`));

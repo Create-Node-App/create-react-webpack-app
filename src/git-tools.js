@@ -15,7 +15,7 @@ const exec = promisify(child_process.exec);
  * @param {string} opts.git Git repository url. If it is a github repo, only
  * type '<username>/<repo>'.
  * @param {string} opts.target The folder of generating to.
- * @param {string} opts.cacheDir? Default `~/.crwp/${name}`, the folder
+ * @param {string} opts.cacheDir? Default `~/.cache/crwp/${name}`, the folder
  * @param {string} opts.branch? Default 'master'. Git branch.
  * @param {string} opts.way? The way of install git, only 'git' or 'zip'.
  * to keep cache.
@@ -24,13 +24,13 @@ const exec = promisify(child_process.exec);
  * @param {boolean} opts.offline? use cached files, and don't update.
  */
 module.exports = async function git(opts) {
-  const { git, zip, offline = false, target = './', branch = 'master', way = 'git' } = opts;
+  const { git, zip, offline = false, target = './', branch = 'master', way = 'git', targetId } = opts;
 
   const absoluteTarget = path.isAbsolute(target) ? target : path.resolve(target);
   const isGithub = /^[^\/]+\/[^\/]+$/.test(git);
   const gitUrl = isGithub ? `https://github.com/${git}` : git;
   const zipUrl = isGithub ? `https://github.com/${git}/archive/${branch}.zip` : zip;
-  const id = Buffer.from(`${git}@${branch}`).toString('base64');
+  const id = targetId || Buffer.from(`${git}@${branch}`).toString('base64');
   let cacheDir = opts.cacheDir || path.join(os.homedir(), '.cache', 'crwp', id);
 
   cacheDir = path.isAbsolute(cacheDir) ? cacheDir : path.resolve(cacheDir);
@@ -43,9 +43,11 @@ module.exports = async function git(opts) {
 
   switch (way) {
     case 'git':
-      return await createByGit();
+      await createByGit();
+      break;
     case 'zip':
-      return await createByZip();
+      await createByZip();
+      break;
     default:
       throw new Error(`Expect parameter opts.way is 'git' or 'zip'`);
   }
@@ -66,7 +68,7 @@ module.exports = async function git(opts) {
     }
 
     await pull(cacheDir);
-    setTimeout(() => {}, 300);
+    setTimeout(() => {}, 400);
     fs.copySync(cacheDir, absoluteTarget, { filter: filterGit });
   }
 
@@ -103,5 +105,5 @@ function clone(git, target, branch) {
  */
 async function pull(cwd) {
   await exec('git checkout -f', { cwd });
-  return await exec('git pull', { cwd });
+  await exec('git pull', { cwd });
 }
