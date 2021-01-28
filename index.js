@@ -27,7 +27,7 @@ program
     'add redux support and setup using redux saga middleware. --redux flag is required'
   )
   .option('--recoil', 'add recoil.js support and setup the state management library for React')
-  .option('--antd', 'add ant-design setup with ant-design icons package')
+  .option('--ant-design', 'add ant-design setup with ant-design icons package')
   .option('--bootstrap', 'add bootstrap and bootstrap-react setup with theme config')
   .option('--material-ui', 'add material ui setup with SVG icons')
   .option('--semantic-ui', 'add semantic ui and semantic ui react setup with theme config')

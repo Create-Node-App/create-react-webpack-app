@@ -33,7 +33,7 @@ the generated project will vary in the presence of the following flags:
 | `--redux`         | add redux support and setup using redux thunk middleware by default.           |
 | `--redux --saga`  | add redux support and setup using redux saga middleware.                       |
 | `--recoil`        | add recoil.js support and setup the state management library for React.        |
-| `--antd`          | add ant-design setup with ant-design icons package.                            |
+| `--ant-design`    | add ant-design setup with ant-design icons package.                            |
 | `--bootstrap`     | add bootstrap and bootstrap-react setup with theme config.                     |
 | `--material-ui`   | add material ui setup with SVG icons.                                          |
 | `--semantic-ui`   | add semantic ui and semantic ui react setup with theme config.                 |
