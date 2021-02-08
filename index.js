@@ -3,10 +3,10 @@
 const program = require('commander');
 const chalk = require('chalk');
 const envinfo = require('envinfo');
+const { createApp } = require('cna-cli/src/install');
 
 const packageJS = require('./package.json');
-const { createApp } = require('./src/install');
-const getAddons = require('./src/addons');
+const getAddons = require('./addons');
 
 let projectName;
 

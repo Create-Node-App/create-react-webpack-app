@@ -29,6 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
+    "cna-cli": "^1.0.0",
     "commander": "^2.19.0",
     "cross-spawn": "^6.0.5",
     "debug": "^4.2.0",

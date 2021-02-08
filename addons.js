@@ -1,4 +1,4 @@
-const { toCamelCase } = require('./helpers');
+const { toCamelCase } = require('cna-cli/src/helpers');
 
 const BASE_URL = 'Create-Node-App/react-webpack-extensions';
 const DOCKER_BASE_URL = 'Create-Node-App/docker-extensions';
