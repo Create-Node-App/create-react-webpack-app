@@ -31,14 +31,7 @@
     "chalk": "^2.4.2",
     "cna-cli": "^1.0.0",
     "commander": "^2.19.0",
-    "cross-spawn": "^6.0.5",
-    "debug": "^4.2.0",
-    "download": "^8.0.0",
-    "envinfo": "^7.1.0",
-    "fs-extra": "^7.0.1",
-    "readdirp": "^3.4.0",
-    "semver": "^5.6.0",
-    "underscore": "^1.10.2"
+    "envinfo": "^7.1.0"
   },
   "devDependencies": {
     "eslint": "^7.9.0",
