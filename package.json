@@ -28,10 +28,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^4.1.0",
     "cna-cli": "^1.0.0",
-    "commander": "^2.19.0",
-    "envinfo": "^7.1.0"
+    "commander": "^7.0.0",
+    "envinfo": "^7.7.4"
   },
   "devDependencies": {
     "eslint": "^7.9.0",

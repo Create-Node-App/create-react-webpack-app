@@ -4,8 +4,8 @@ const BASE_URL = 'Create-Node-App/react-webpack-extensions';
 const DOCKER_BASE_URL = 'Create-Node-App/docker-extensions';
 const ANDROID_TOOLS_BASE_URL = 'Create-Node-App/android-tools';
 
-module.exports = (program) => {
-  const lang = program.typescript ? 'ts' : 'es';
+module.exports = (options) => {
+  const lang = options.typescript ? 'ts' : 'es';
   const langAddons = [
     'redux',
     'saga',
@@ -29,30 +29,24 @@ module.exports = (program) => {
   ];
 
   langAddons.forEach((addon) => {
-    if (program[toCamelCase(addon)]) {
+    if (options[toCamelCase(addon)]) {
       addons.push({ addon: `${BASE_URL}@addon/${addon}#type=common`, git: true });
       addons.push({ addon: `${BASE_URL}@addon/${addon}#type=${lang}`, git: true });
     }
   });
 
-  if (program.ionic) {
+  if (options.ionic) {
     addons.push({ addon: `${BASE_URL}@addon/ionic`, git: true });
   }
-  if (program.androidTools) {
+  if (options.androidTools) {
     addons.push({ addon: `${ANDROID_TOOLS_BASE_URL}@addon/docker/android`, git: true });
   }
-  if (program.docker) {
+  if (options.docker) {
     addons.push({ addon: `${DOCKER_BASE_URL}@addon/docker/web`, git: true });
   }
 
-  if (program.extend) {
-    addons.push(
-      ...String(program.extend)
-        .split(',')
-        .map((addon) => {
-          return { addon, git: true };
-        })
-    );
+  if (options.extend) {
+    addons.push(...options.extend.map((addon) => ({ addon, git: true })));
   }
 
   return addons;
