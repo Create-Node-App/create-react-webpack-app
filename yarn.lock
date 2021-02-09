@@ -301,10 +301,10 @@ clone-response@1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
-cna-cli@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.1.3.tgz#2cd888a6ce3d833381a3bcbb539659a965296e70"
-  integrity sha512-hIyUJHoVD9DyhhX90yGmRzcQ4AyxN1m5U4VvpjRAhpEhDmPS2HpDlFTETrRVR6fc9bEOhHN38T898faih/3Kzw==
+cna-cli@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.1.4.tgz#fe38745ebec3ba039bfedc299a1f5d688cbbc9da"
+  integrity sha512-pwYiy3AZ3gmUfDOlRm5zVWKd7RX//fgr0zRVQBzbICphtJFydKVI9JFrE32IpIuvT39qwX8djZ2J+hOC7H/Irg==
   dependencies:
     chalk "^4.1.0"
     commander "^7.0.0"
