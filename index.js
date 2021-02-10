@@ -21,6 +21,10 @@ program
   .option('--info', 'print environment debug info')
   .option('--use-npm', 'use npm mandatorily')
   .option('--typescript', 'add TypeScript support')
+  .option(
+    '--i18n',
+    'add i18n setup using react-i18n and async backend with locale and timezone support'
+  )
   .option('--redux', 'add redux support and setup using redux thunk middleware by default')
   .option(
     '--saga',

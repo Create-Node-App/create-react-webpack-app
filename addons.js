@@ -7,6 +7,7 @@ const ANDROID_TOOLS_BASE_URL = 'Create-Node-App/android-tools';
 module.exports = (options) => {
   const lang = options.typescript ? 'ts' : 'es';
   const langAddons = [
+    'i18n',
     'redux',
     'saga',
     'recoil',
