@@ -20,19 +20,19 @@ module.exports = (options) => {
   // initialized with base template
   let addons = [
     {
-      addon: `${BASE_URL}@addon/base#type=common`,
+      addon: `${BASE_URL}@addon/base#path=common`,
       git: true,
     },
     {
-      addon: `${BASE_URL}@addon/base#type=${lang}`,
+      addon: `${BASE_URL}@addon/base#path=${lang}`,
       git: true,
     },
   ];
 
   langAddons.forEach((addon) => {
     if (options[toCamelCase(addon)]) {
-      addons.push({ addon: `${BASE_URL}@addon/${addon}#type=common`, git: true });
-      addons.push({ addon: `${BASE_URL}@addon/${addon}#type=${lang}`, git: true });
+      addons.push({ addon: `${BASE_URL}@addon/${addon}#path=common`, git: true });
+      addons.push({ addon: `${BASE_URL}@addon/${addon}#path=${lang}`, git: true });
     }
   });
 
