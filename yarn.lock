@@ -301,10 +301,10 @@ clone-response@1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
-cna-cli@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.1.4.tgz#fe38745ebec3ba039bfedc299a1f5d688cbbc9da"
-  integrity sha512-pwYiy3AZ3gmUfDOlRm5zVWKd7RX//fgr0zRVQBzbICphtJFydKVI9JFrE32IpIuvT39qwX8djZ2J+hOC7H/Irg==
+cna-cli@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.2.0.tgz#b32fe88cc6c844b88d93d5323eb031a55933ad50"
+  integrity sha512-GodKhvhcUmo8ycYXEU7GepxWJlN2mq1CUzhbHMPAqVsXyXqKWvHK/kzIHg5KfWKIJ/VQzmNrAYwfN+gqDP947w==
   dependencies:
     chalk "^4.1.0"
     commander "^7.0.0"
@@ -313,6 +313,7 @@ cna-cli@^1.1.4:
     download "^8.0.0"
     envinfo "^7.7.4"
     fs-extra "^7.0.1"
+    lodash.merge "^4.6.2"
     readdirp "^3.4.0"
     semver "^5.6.0"
     underscore "^1.10.2"
@@ -1448,6 +1449,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+lodash.merge@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
+  integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
 lodash@^4.17.20:
   version "4.17.21"
