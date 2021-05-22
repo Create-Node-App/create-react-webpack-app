@@ -43,6 +43,7 @@ program
   .option('--ionic', 'generates cross-platform setup using ionic react and capacitor')
   .option('--extend <repos...>', 'git repositories to extend your boilerplate')
   .option('-a, --alias <alias>', 'webpack alias', 'app')
+  .option('--src-dir <src-dir>', 'dir name to put content under [src]/', 'src')
   .option('--nodeps', 'generate package.json file without installing dependencies')
   .option('--inplace', 'apply setup to an existing project')
   .allowUnknownOption()
@@ -98,5 +99,7 @@ createApp(
   options.inplace,
   addons,
   options.alias,
-  !options.nodeps
+  !options.nodeps,
+  false,
+  options.srcDir
 );
