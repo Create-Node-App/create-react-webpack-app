@@ -20,6 +20,7 @@ program
   .option('--verbose', 'print additional logs')
   .option('--info', 'print environment debug info')
   .option('--use-npm', 'use npm mandatorily')
+  .option('--cra', 'use create-react-app for initial setup')
   .option('--typescript', 'add TypeScript support')
   .option(
     '--i18n',

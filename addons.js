@@ -1,8 +1,10 @@
 const { toCamelCase } = require('cna-cli/src/helpers');
 
-const BASE_URL = 'Create-Node-App/react-webpack-extensions';
-const DOCKER_BASE_URL = 'Create-Node-App/docker-extensions';
-const ANDROID_TOOLS_BASE_URL = 'Create-Node-App/android-tools';
+const REACT_EXTENSIONS = 'Create-Node-App/react-webpack-extensions';
+const DOCKER_EXTENSIONS = 'Create-Node-App/docker-extensions';
+const ANDROID_TOOLS_EXTENSIONS = 'Create-Node-App/android-tools';
+const CRA_TEMPLATE = `${REACT_EXTENSIONS}@addon/cra#path=es`;
+const CRA_TS_TEMPLATE = `${REACT_EXTENSIONS}@addon/cra#path=ts`;
 
 module.exports = (options) => {
   const lang = options.typescript ? 'ts' : 'es';
@@ -20,30 +22,39 @@ module.exports = (options) => {
   // initialized with base template
   let addons = [
     {
-      addon: `${BASE_URL}@addon/base#path=common`,
+      addon: `${REACT_EXTENSIONS}@addon/base#path=common`,
       git: true,
     },
     {
-      addon: `${BASE_URL}@addon/base#path=${lang}`,
+      addon: `${REACT_EXTENSIONS}@addon/base#path=${lang}`,
       git: true,
     },
   ];
 
+  if (options.cra) {
+    addons = [
+      {
+        addon: options.typescript ? CRA_TS_TEMPLATE : CRA_TEMPLATE,
+        git: true,
+      },
+    ];
+  }
+
   langAddons.forEach((addon) => {
     if (options[toCamelCase(addon)]) {
-      addons.push({ addon: `${BASE_URL}@addon/${addon}#path=common`, git: true });
-      addons.push({ addon: `${BASE_URL}@addon/${addon}#path=${lang}`, git: true });
+      addons.push({ addon: `${REACT_EXTENSIONS}@addon/${addon}#path=common`, git: true });
+      addons.push({ addon: `${REACT_EXTENSIONS}@addon/${addon}#path=${lang}`, git: true });
     }
   });
 
   if (options.ionic) {
-    addons.push({ addon: `${BASE_URL}@addon/ionic`, git: true });
+    addons.push({ addon: `${REACT_EXTENSIONS}@addon/ionic`, git: true });
   }
   if (options.androidTools) {
-    addons.push({ addon: `${ANDROID_TOOLS_BASE_URL}@addon/docker/android`, git: true });
+    addons.push({ addon: `${ANDROID_TOOLS_EXTENSIONS}@addon/docker/android`, git: true });
   }
   if (options.docker) {
-    addons.push({ addon: `${DOCKER_BASE_URL}@addon/docker/web`, git: true });
+    addons.push({ addon: `${DOCKER_EXTENSIONS}@addon/docker/web`, git: true });
   }
 
   if (options.extend) {
