@@ -20,8 +20,13 @@ program
   .option('--verbose', 'print additional logs')
   .option('--info', 'print environment debug info')
   .option('--use-npm', 'use npm mandatorily')
-  .option('--cra', 'use create-react-app for initial setup')
+  .option('--cra', 'use `create-react-app` for initial setup')
   .option('--typescript', 'add TypeScript support')
+  .option('--extend <repos...>', 'git repositories to extend your boilerplate')
+  .option('-a, --alias <alias>', 'webpack alias', 'app')
+  .option('--src-dir <src-dir>', 'dir name to put content under [src]/', 'src')
+  .option('--nodeps', 'generate package.json file without installing dependencies')
+  .option('--inplace', 'apply setup to an existing project')
   .option(
     '--i18n',
     'add i18n setup using react-i18n and async backend with locale and timezone support'
@@ -42,11 +47,6 @@ program
     'generate dockerfiles with android tools to perform android emulation, testing and apk generation.'
   )
   .option('--ionic', 'generates cross-platform setup using ionic react and capacitor')
-  .option('--extend <repos...>', 'git repositories to extend your boilerplate')
-  .option('-a, --alias <alias>', 'webpack alias', 'app')
-  .option('--src-dir <src-dir>', 'dir name to put content under [src]/', 'src')
-  .option('--nodeps', 'generate package.json file without installing dependencies')
-  .option('--inplace', 'apply setup to an existing project')
   .allowUnknownOption()
   .on('--help', () => {
     console.log();
