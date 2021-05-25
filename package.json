@@ -1,6 +1,6 @@
 {
   "name": "create-react-webpack-project",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "Command line tool to create single page applications using React and Webpack with a lot of different addons.",
   "repository": {
     "type": "git",
