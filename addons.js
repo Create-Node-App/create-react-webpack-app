@@ -1,10 +1,10 @@
 const { toCamelCase } = require('cna-cli/src/helpers');
 
-const REACT_EXTENSIONS = 'https://github.com/Create-Node-App/react-webpack-extensions';
+const REACT_EXTENSIONS = 'https://github.com/Create-Node-App/react-extensions';
 const DOCKER_EXTENSIONS = 'https://github.com/Create-Node-App/docker-extensions';
 const ANDROID_TOOLS_EXTENSIONS = 'https://github.com/Create-Node-App/android-tools';
-const CRA_TEMPLATE = `${REACT_EXTENSIONS}?branch=addon/cra&subdir=es`;
-const CRA_TS_TEMPLATE = `${REACT_EXTENSIONS}?branch=addon/cra&subdir=ts`;
+const CRA_TEMPLATE = `${REACT_EXTENSIONS}?branch=main&subdir=addons/create-react-app/es`;
+const CRA_TS_TEMPLATE = `${REACT_EXTENSIONS}?branch=main&subdir=addons/create-react-app/ts`;
 const NEXTJS_EXAMPLES =
   'https://github.com/vercel/next.js?branch=canary&templatedir=&subdir=examples';
 const GATSBY_ORG_URL = 'https://github.com/gatsbyjs';
@@ -49,10 +49,10 @@ module.exports = (options) => {
   // initialized with base template
   let addons = [
     {
-      addon: `${REACT_EXTENSIONS}?branch=addon/base&subdir=common`,
+      addon: `${REACT_EXTENSIONS}?branch=main&subdir=addons/webpack-base/common`,
     },
     {
-      addon: `${REACT_EXTENSIONS}?branch=addon/base&subdir=${lang}`,
+      addon: `${REACT_EXTENSIONS}?branch=main&subdir=addons/webpack-base/${lang}`,
     },
   ];
 
@@ -90,13 +90,13 @@ module.exports = (options) => {
 
   langAddons.forEach((addon) => {
     if (options[toCamelCase(addon)]) {
-      addons.push({ addon: `${REACT_EXTENSIONS}?branch=addon/${addon}&subdir=common` });
-      addons.push({ addon: `${REACT_EXTENSIONS}?branch=addon/${addon}&subdir=${lang}` });
+      addons.push({ addon: `${REACT_EXTENSIONS}?branch=main&subdir=addons/${addon}/common` });
+      addons.push({ addon: `${REACT_EXTENSIONS}?branch=main&subdir=addons/${addon}/${lang}` });
     }
   });
 
   if (options.ionic) {
-    addons.push({ addon: `${REACT_EXTENSIONS}?branch=addon/ionic` });
+    addons.push({ addon: `${REACT_EXTENSIONS}?branch=main&subdir=addons/ionic` });
   }
   if (options.androidTools) {
     addons.push({ addon: `${ANDROID_TOOLS_EXTENSIONS}?branch=addon/docker/android` });
