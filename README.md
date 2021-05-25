@@ -11,7 +11,7 @@ The primary goal of this project is to provide a stable foundation upon which to
 ## Quickstart
 
 ```sh
-$ npx create-react-webpack-project my-app
+$ npx create-react-webpack-project my-app # or specify flag `-i` to use interactive menu
 $ cd my-app
 $ npm start
 ```
@@ -20,12 +20,14 @@ the generated project will vary in the presence of the following flags:
 
 | Flag                    | What is it for?                                                                     |
 | ----------------------- | ----------------------------------------------------------------------------------- |
+| `-i, --interactive`     | use interactive mode to bootstrap your app                                          |
 | `--verbose`             | print additional logs.                                                              |
 | `--info`                | print environment debug info.                                                       |
 | `--nodeps`              | will no install dependencies on the generated project.                              |
 | `--use-npm`             | will use npm as command.                                                            |
 | `--template <template>` | especify template to use for initial setup                                          |
 | `--cra [template]`      | use `create-react-app` for initial setup with optional example                      |
+| `--gatsby <template>`   | use `gatsby` using an existing boilerplate for initial setup                        |
 | `--next <example>`      | use `create-next-app` for initial setup using a nextjs example                      |
 | `--inplace`             | apply setup to an existing project.                                                 |
 | `-a <alias>`            | will setup webpack alias. `app` by default.                                         |

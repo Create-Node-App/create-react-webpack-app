@@ -7,12 +7,21 @@ const CRA_TEMPLATE = `${REACT_EXTENSIONS}?branch=addon/cra&subdir=es`;
 const CRA_TS_TEMPLATE = `${REACT_EXTENSIONS}?branch=addon/cra&subdir=ts`;
 const NEXTJS_EXAMPLES =
   'https://github.com/vercel/next.js?branch=canary&templatedir=&subdir=examples';
+const GATSBY_ORG_URL = 'https://github.com/gatsbyjs';
 
 const getCraTemplateUrl = (template) => {
   try {
     return new URL(template).toString();
   } catch (error) {
     return template;
+  }
+};
+
+const getGatsbyTemplateUrl = (template) => {
+  try {
+    return new URL(template).toString();
+  } catch (error) {
+    return `${GATSBY_ORG_URL}/${template}?branch=master&templatedir=`;
   }
 };
 
@@ -63,6 +72,14 @@ module.exports = (options) => {
     }
   }
 
+  if (options.gatsby) {
+    addons = [
+      {
+        addon: getGatsbyTemplateUrl(options.gatsby),
+      },
+    ];
+  }
+
   if (options.next) {
     addons = [
       {
@@ -89,7 +106,7 @@ module.exports = (options) => {
   }
 
   if (options.extend) {
-    addons.push(...options.extend.map((addon) => ({ addon })));
+    addons.push(...options.extend.filter(Boolean).map((addon) => ({ addon })));
   }
 
   return addons;
