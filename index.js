@@ -14,56 +14,58 @@ const addonsOptions = [
   {
     flag: '--i18n',
     value: 'i18n',
-    description:
-      'add i18n setup using react-i18n and async backend with locale and timezone support',
+    description: 'Add i18n using `react-i18n` and async backend with locale and timezone support',
   },
   {
     flag: '--redux',
     value: 'redux',
-    description: 'add redux support and setup using redux thunk middleware by default',
+    description: 'Add `redux` setup using `redux-thunk` middleware',
   },
   {
-    flag: '--saga',
-    value: 'saga',
-    description:
-      'add redux support and setup using redux saga middleware. --redux flag is required',
+    flag: '--redux-saga',
+    value: 'reduxSaga',
+    description: 'Add `redux` setup using `redux-saga` middleware',
   },
   {
     flag: '--recoil',
     value: 'recoil',
-    description: 'add recoil.js support and setup the state management library for React',
+    description: 'Add recoil.js support and setup the state management library for React',
   },
   {
     flag: '--ant-design',
     value: 'andDesign',
-    description: 'add ant-design setup with ant-design icons package',
+    description: 'Add ant-design setup with ant-design icons package',
   },
   {
     flag: '--bootstrap',
     value: 'bootstrap',
-    description: 'add bootstrap and bootstrap-react setup with theme config',
+    description: 'Add bootstrap and bootstrap-react setup with theme config',
   },
   {
     flag: '--material-ui',
     value: 'materialUi',
-    description: 'add material ui setup with SVG icons',
+    description: 'Add material ui setup with SVG icons',
   },
   {
     flag: '--semantic-ui',
     value: 'semanticUi',
-    description: 'add semantic ui and semantic ui react setup with theme config',
+    description: 'Add semantic ui and semantic ui react setup with theme config',
   },
-  { flag: '--docker', value: 'docker', description: 'generate dockerfiles' },
+  {
+    flag: '--docker',
+    value: 'docker',
+    description: 'Generate dockerfiles for web development and deployment',
+  },
   {
     flag: '--android-tools',
     value: 'androidTools',
     description:
-      'generate dockerfiles with android tools to perform android emulation, testing and apk generation.',
+      'Generate dockerfiles with android tools to perform android emulation, testing and apk generation',
   },
   {
     flag: '--ionic',
     value: 'ionic',
-    description: 'generates cross-platform setup using ionic react and capacitor',
+    description: 'Generates cross-platform setup using ionic react and capacitor',
   },
 ];
 

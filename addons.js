@@ -38,7 +38,7 @@ module.exports = (options) => {
   const langAddons = [
     'i18n',
     'redux',
-    'saga',
+    'redux-saga',
     'recoil',
     'ant-design',
     'bootstrap',
