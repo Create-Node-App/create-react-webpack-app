@@ -310,10 +310,10 @@ clone-response@1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
-cna-cli@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.3.1.tgz#119d6b492c87474987898aa15327722550ab2a13"
-  integrity sha512-15kbsUIv6f9tG27DC0VrJ+f7GiQ2lexygw9B63d2PFNJNOemV607Z2zahnn4UuiKB9OG252U99vevkuM5TvfgQ==
+cna-cli@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/cna-cli/-/cna-cli-1.3.3.tgz#309a3a66c2e09f04e5ba50d89e7fce962d4c980e"
+  integrity sha512-ou2Bk4f5+2GMcRYKApXcsCbu3eblcNmJCSat0/ta+l991ryD5Rp9YCq17KTAZF56QMnq2pYvSpO7s6fO8NxXBg==
   dependencies:
     chalk "^4.1.0"
     commander "^7.0.0"
@@ -323,9 +323,11 @@ cna-cli@^1.3.1:
     envinfo "^7.7.4"
     fs-extra "^7.0.1"
     lodash.merge "^4.6.2"
+    prompts "^2.4.1"
     readdirp "^3.4.0"
     semver "^5.6.0"
     underscore "^1.10.2"
+    yargs "^17.0.1"
 
 color-convert@^1.9.0:
   version "1.9.3"
