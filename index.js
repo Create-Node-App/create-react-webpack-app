@@ -272,6 +272,10 @@ if (options.interactive) {
 } else {
   const addons = getAddons(options);
 
+  if (options.verbose) {
+    console.log({ addons });
+  }
+
   createApp(
     projectName,
     options.verbose,
