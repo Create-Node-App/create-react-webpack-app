@@ -3,71 +3,9 @@
 const program = require('commander');
 const chalk = require('chalk');
 const envinfo = require('envinfo');
-const prompts = require('prompts');
-prompts.override(require('yargs').argv);
 const { createApp } = require('cna-cli/src/install');
-
+const { getCrwpOptions, addonsOptions } = require('./crwp');
 const packageJS = require('./package.json');
-const getAddons = require('./addons');
-
-const addonsOptions = [
-  {
-    flag: '--i18n',
-    value: 'i18n',
-    description: 'Add i18n using `react-i18n` and async backend with locale and timezone support',
-  },
-  {
-    flag: '--redux',
-    value: 'redux',
-    description: 'Add `redux` setup using `redux-thunk` middleware',
-  },
-  {
-    flag: '--redux-saga',
-    value: 'reduxSaga',
-    description: 'Add `redux` setup using `redux-saga` middleware',
-  },
-  {
-    flag: '--recoil',
-    value: 'recoil',
-    description: 'Add recoil.js support and setup the state management library for React',
-  },
-  {
-    flag: '--ant-design',
-    value: 'andDesign',
-    description: 'Add ant-design setup with ant-design icons package',
-  },
-  {
-    flag: '--bootstrap',
-    value: 'bootstrap',
-    description: 'Add bootstrap and bootstrap-react setup with theme config',
-  },
-  {
-    flag: '--material-ui',
-    value: 'materialUi',
-    description: 'Add material ui setup with SVG icons',
-  },
-  {
-    flag: '--semantic-ui',
-    value: 'semanticUi',
-    description: 'Add semantic ui and semantic ui react setup with theme config',
-  },
-  {
-    flag: '--docker',
-    value: 'docker',
-    description: 'Generate dockerfiles for web development and deployment',
-  },
-  {
-    flag: '--android-tools',
-    value: 'androidTools',
-    description:
-      'Generate dockerfiles with android tools to perform android emulation, testing and apk generation',
-  },
-  {
-    flag: '--ionic',
-    value: 'ionic',
-    description: 'Generates cross-platform setup using ionic react and capacitor',
-  },
-];
 
 let projectName = 'app';
 
@@ -142,149 +80,18 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
-if (options.interactive) {
-  (async () => {
-    const baseInput = await prompts([
-      {
-        type: 'text',
-        name: 'projectName',
-        message: `What's your project name?`,
-        initial: projectName,
-      },
-      {
-        type: 'toggle',
-        name: 'useNpm',
-        message: 'Use `npm` mandatorily?',
-        initial: options.useNpm,
-        active: 'yes',
-        inactive: 'no',
-      },
-      {
-        type: 'select',
-        name: 'backend',
-        message: 'Select tool for initial setup',
-        choices: [
-          { title: 'Create React Webpack app', value: 'crwp' },
-          { title: 'Create React app', value: 'cra' },
-          { title: 'Create NextJS app', value: 'next' },
-          { title: 'Create Gatsby app', value: 'gatsby' },
-        ],
-        initial: 0,
-      },
-      {
-        type: 'toggle',
-        name: 'typescript',
-        message: 'Use typescript?',
-        initial: options.typescript,
-        active: 'yes',
-        inactive: 'no',
-      },
-    ]);
+(async () => {
+  const appOptions = await getCrwpOptions({ ...options, projectName });
 
-    baseInput[baseInput.backend] = baseInput;
-    let defaultTemplate = '';
-    if (baseInput.gatsby) {
-      defaultTemplate = 'gatsby-starter-default';
-    }
-
-    const { template } = await prompts([
-      {
-        type: 'text',
-        name: 'template',
-        message: 'Template to use to bootstrap application',
-        initial: defaultTemplate,
-        validate: (value) => {
-          if (baseInput.next || baseInput.gatsby) {
-            if (value.trim() === '') {
-              return 'You must specify a template when using `Create NextJS app` or `Create Gatsby app`';
-            }
-          }
-          return true;
-        },
-      },
-    ]);
-
-    baseInput.template = template;
-    baseInput[baseInput.backend] = template === '' ? true : template;
-
-    const defaultSrcDir = baseInput.cra === true ? 'src' : options.srcDir;
-
-    const backendConfig = await prompts([
-      {
-        type: 'text',
-        name: 'srcDir',
-        message:
-          'Sub directory to put all source content (.e.g. `src`, `app`). Will be on root directory by default',
-        initial: defaultSrcDir,
-      },
-      {
-        type: 'text',
-        name: 'alias',
-        message: 'Webpack alias if needed',
-        initial: options.alias,
-      },
-      {
-        type: 'multiselect',
-        name: 'addons',
-        message: 'Select extensions',
-        choices: addonsOptions.map((option) => ({
-          title: option.description,
-          value: option.value,
-        })),
-      },
-      {
-        type: 'list',
-        name: 'extend',
-        message: 'Enter extensions',
-        initial: '',
-        separator: ',',
-      },
-    ]);
-
-    let { addons: selectedAddons, ...appOptions } = {
-      ...options,
-      ...baseInput,
-      ...backendConfig,
-    };
-
-    selectedAddons.forEach((addon) => {
-      appOptions[addon] = true;
-    });
-
-    const addons = getAddons(appOptions);
-
-    if (appOptions.verbose) {
-      console.log({ ...appOptions, addons });
-    }
-
-    await createApp(
-      appOptions.projectName,
-      appOptions.verbose,
-      appOptions.useNpm,
-      appOptions.inplace,
-      addons,
-      appOptions.alias,
-      !appOptions.nodeps,
-      false,
-      appOptions.srcDir
-    );
-  })();
-} else {
-  const addons = getAddons(options);
-
-  if (options.verbose) {
-    console.log({ addons });
-  }
-
-  createApp(
-    projectName,
-    options.verbose,
-    options.useNpm,
-    options.inplace,
-    addons,
-    options.alias,
-    !options.nodeps,
+  await createApp(
+    appOptions.projectName,
+    appOptions.verbose,
+    appOptions.useNpm,
+    appOptions.inplace,
+    appOptions.addons,
+    appOptions.alias,
+    !appOptions.nodeps,
     false,
-    options.srcDir
+    appOptions.srcDir
   );
-}
+})();

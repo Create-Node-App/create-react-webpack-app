@@ -33,6 +33,25 @@ const getNextJsExampleUrl = (template) => {
   }
 };
 
+/**
+ *
+ * @param {{cra?: string | boolean, next?: boolean, gatsby?: boolean}} options - User options to build setup
+ * @param {string | undefined} template - Template url or name specified for the user
+ * @returns {string} - extension url
+ */
+const getExtensionUrl = (options, template) => {
+  if (options.cra && typeof options.cra === 'string') {
+    return getCraTemplateUrl(template || options.cra);
+  }
+  if (options.next) {
+    return getNextJsExampleUrl(template || options.next);
+  }
+  if (options.gatsby) {
+    return getGatsbyTemplateUrl(template || options.gatsby);
+  }
+  return template;
+};
+
 module.exports = (options) => {
   const lang = options.typescript ? 'ts' : 'es';
   const langAddons = [
@@ -56,36 +75,18 @@ module.exports = (options) => {
     },
   ];
 
-  if (options.template) {
-    addons = [{ addon: options.template }];
-  }
-
   if (options.cra) {
     addons = [
       {
         addon: options.typescript ? CRA_TS_TEMPLATE : CRA_TEMPLATE,
       },
     ];
-
-    if (typeof options.cra === 'string') {
-      addons.push({ addon: getCraTemplateUrl(options.cra) });
-    }
   }
 
-  if (options.gatsby) {
-    addons = [
-      {
-        addon: getGatsbyTemplateUrl(options.gatsby),
-      },
-    ];
-  }
+  const baseTemplate = getExtensionUrl(options, options.template);
 
-  if (options.next) {
-    addons = [
-      {
-        addon: getNextJsExampleUrl(options.next),
-      },
-    ];
+  if (baseTemplate) {
+    addons = options.cra ? [...addons, { addon: baseTemplate }] : [{ addon: baseTemplate }];
   }
 
   langAddons.forEach((addon) => {
@@ -106,7 +107,9 @@ module.exports = (options) => {
   }
 
   if (options.extend) {
-    addons.push(...options.extend.filter(Boolean).map((addon) => ({ addon })));
+    addons.push(
+      ...options.extend.filter(Boolean).map((addon) => ({ addon: getExtensionUrl(options, addon) }))
+    );
   }
 
   return addons;
