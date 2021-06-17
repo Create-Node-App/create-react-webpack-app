@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.0",
-    "cna-cli": "^1.5.2",
+    "cna-cli": "^1.5.3",
     "commander": "^7.0.0",
     "prompts": "^2.4.1",
     "yargs": "^17.0.1"
