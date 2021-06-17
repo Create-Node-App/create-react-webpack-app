@@ -1,4 +1,5 @@
-const { toCamelCase } = require('cna-cli/src/helpers');
+const { toCamelCase } = require('cna-cli/lib/helpers');
+const { Options } = require('.');
 
 const REACT_EXTENSIONS = 'https://github.com/Create-Node-App/react-extensions';
 const DOCKER_EXTENSIONS = 'https://github.com/Create-Node-App/docker-extensions';
@@ -6,7 +7,7 @@ const ANDROID_TOOLS_EXTENSIONS = 'https://github.com/Create-Node-App/android-too
 const CRA_TEMPLATE = `${REACT_EXTENSIONS}?branch=main&subdir=addons/create-react-app/es`;
 const CRA_TS_TEMPLATE = `${REACT_EXTENSIONS}?branch=main&subdir=addons/create-react-app/ts`;
 const NEXTJS_EXAMPLES =
-  'https://github.com/vercel/next.js?branch=canary&templatedir=&subdir=examples';
+  'https://github.com/Create-Node-App/nextjs-extensions?branch=main&templatedir=&subdir=examples';
 const GATSBY_ORG_URL = 'https://github.com/gatsbyjs';
 
 const getCraTemplateUrl = (template) => {
@@ -34,9 +35,10 @@ const getNextJsExampleUrl = (template) => {
 };
 
 /**
+ * getExtensionUrl returns the extension URL based on selected backend
  *
- * @param {{cra?: string | boolean, next?: boolean, gatsby?: boolean}} options - User options to build setup
- * @param {string | undefined} template - Template url or name specified for the user
+ * @param {Options} options - User options to build setup
+ * @param {(string | undefined)} template - Template url or name specified for the user
  * @returns {string} - extension url
  */
 const getExtensionUrl = (options, template) => {
@@ -52,6 +54,11 @@ const getExtensionUrl = (options, template) => {
   return template;
 };
 
+/**
+ * get addons from user options
+ * @param {Options} options - Options specified by the user to create addons
+ * @returns {{ addon: string, ignorePackage?: boolean }[]}
+ */
 module.exports = (options) => {
   const lang = options.typescript ? 'ts' : 'es';
   const langAddons = [

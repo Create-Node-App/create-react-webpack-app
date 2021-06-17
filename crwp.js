@@ -1,7 +1,13 @@
 const prompts = require('prompts');
 prompts.override(require('yargs').argv);
-const getAddons = require('./addons');
 
+const getAddons = require('./addons');
+const { Options } = require('.');
+const backendTemplates = require('./templates');
+
+/**
+ * Addons options to bootstrap the React app
+ */
 const addonsOptions = [
   {
     flag: '--i18n',
@@ -61,6 +67,11 @@ const addonsOptions = [
   },
 ];
 
+/**
+ * preprocess user options after bootstrapping the app
+ * @param {Options} options - Options to bootstrap application
+ * @returns {Options}
+ */
 const getCrwpOptions = async (options) => {
   let appOptions = options;
 
@@ -102,19 +113,27 @@ const getCrwpOptions = async (options) => {
       },
     ]);
 
-    baseInput[baseInput.backend] = baseInput;
+    baseInput[baseInput.backend] = true;
     let defaultTemplate = '';
     if (baseInput.gatsby) {
       defaultTemplate = 'gatsby-starter-default';
     }
 
-    const { template } = await prompts([
+    const templateAutocomplete = [
       {
-        type: 'text',
+        type: 'toggle',
+        name: 'templateChoice',
+        message: `Select existing template for ${baseInput.backend}?`,
+        active: 'yes',
+        inactive: 'no',
+      },
+      {
+        type: (prev) => (prev === true ? 'autocomplete' : 'text'),
         name: 'template',
         message: 'Template to use to bootstrap application',
         initial: defaultTemplate,
-        validate: (value) => {
+        choices: backendTemplates[baseInput.backend],
+        validate: (value = '') => {
           if (baseInput.next || baseInput.gatsby) {
             if (value.trim() === '') {
               return 'You must specify a template when using `Create NextJS app` or `Create Gatsby app`';
@@ -123,10 +142,31 @@ const getCrwpOptions = async (options) => {
           return true;
         },
       },
-    ]);
+    ];
+
+    const templateInput = [
+      {
+        type: 'text',
+        name: 'template',
+        message: 'Template to use to bootstrap application',
+        initial: defaultTemplate,
+        validate: (value = '') => {
+          if (baseInput.next || baseInput.gatsby) {
+            if (value.trim() === '') {
+              return 'You must specify a template when using `Create NextJS app` or `Create Gatsby app`';
+            }
+          }
+          return true;
+        },
+      },
+    ];
+
+    const { template } = await prompts(
+      backendTemplates[baseInput.backend] ? templateAutocomplete : templateInput
+    );
 
     baseInput.template = template;
-    baseInput[baseInput.backend] = template === '' ? true : template;
+    baseInput[baseInput.backend] = !template ? true : template;
 
     const defaultSrcDir = baseInput.cra === true ? 'src' : appOptions.srcDir;
 
@@ -148,24 +188,51 @@ const getCrwpOptions = async (options) => {
         type: 'multiselect',
         name: 'addons',
         message: 'Select extensions',
+        hint: '- Space to select. Return to submit',
         choices: addonsOptions.map((option) => ({
           title: option.description,
           value: option.value,
         })),
       },
+    ]);
+
+    const extendAutocomplete = [
+      {
+        type: 'toggle',
+        name: 'templateChoice',
+        message: `Select existing extensions for ${baseInput.backend}?`,
+        active: 'yes',
+        inactive: 'no',
+      },
+      {
+        type: (prev) => (prev === true ? 'multiselect' : 'text'),
+        name: 'extend',
+        message: 'Select extensions',
+        initial: '',
+        separator: (prev) => (prev === true ? undefined : ','),
+        choices: backendTemplates[baseInput.backend],
+      },
+    ];
+
+    const extendInput = [
       {
         type: 'list',
         name: 'extend',
-        message: 'Enter extensions',
+        message: 'Enter custom extensions',
         initial: '',
         separator: ',',
       },
-    ]);
+    ];
+
+    const { extend } = await prompts(
+      backendTemplates[baseInput.backend] ? extendAutocomplete : extendInput
+    );
 
     let { addons: selectedAddons, ...nextAppOptions } = {
       ...options,
       ...baseInput,
       ...backendConfig,
+      extend,
     };
 
     selectedAddons.forEach((addon) => {
