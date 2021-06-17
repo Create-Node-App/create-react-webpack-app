@@ -1,5 +1,5 @@
 const { toCamelCase } = require('cna-cli/lib/helpers');
-const { Options } = require('.');
+const { Options } = require('./docs');
 
 const REACT_EXTENSIONS = 'https://github.com/Create-Node-App/react-extensions';
 const DOCKER_EXTENSIONS = 'https://github.com/Create-Node-App/docker-extensions';
