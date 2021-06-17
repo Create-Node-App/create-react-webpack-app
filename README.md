@@ -25,7 +25,7 @@ the generated project will vary in the presence of the following flags:
 | `--info`                | print environment debug info.                                                       |
 | `--nodeps`              | will no install dependencies on the generated project.                              |
 | `--use-npm`             | will use npm as command.                                                            |
-| `--template <template>` | especify template to use for initial setup                                          |
+| `--template <template>` | specify template to use for initial setup                                           |
 | `--cra [template]`      | use `create-react-app` for initial setup with optional example                      |
 | `--gatsby <template>`   | use `gatsby` using an existing boilerplate for initial setup                        |
 | `--next <example>`      | use `create-next-app` for initial setup using a nextjs example                      |
@@ -79,3 +79,11 @@ _`yarn create` is available in Yarn 0.25+_
 
 It will create a directory called `my-app` inside the current folder.<br>
 Inside that directory, it will generate the initial project structure and install the transitive dependencies.
+
+## Contributors
+
+<a href="https://github.com/Create-Node-App/create-node-app/contributors">
+  <img src="https://contrib.rocks/image?repo=Create-Node-App/create-node-app"/>
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
