@@ -44,6 +44,9 @@
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2"
   },
+  "engines": {
+    "node": ">=16.0.0 <17.0.0"
+  },
   "scripts": {
     "lint": "prettier --ignore-path .eslintignore --check \"**/*.{js,json,md}\" && eslint .",
     "lint:fix": "prettier --ignore-path .eslintignore --write \"**/*.{js,json,md}\" && eslint . --fix"
